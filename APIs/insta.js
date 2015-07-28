@@ -62,4 +62,9 @@ module.exports = {
 
   }
 
+  // get your photos
+  // getMyData: function(){
+  //   instagram.user.self.media()
+  // };
+
 };
