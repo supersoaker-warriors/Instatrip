@@ -33,6 +33,7 @@ angular.module('instatrip.services', [])
     }
 
     function calcRoute(start, end, travelMethod, callback) {
+      var travelMethod = travelMethod || 'DRIVING';
       var waypoints = []; // these will be waypoints along the way
       var request = {
           origin: start,
