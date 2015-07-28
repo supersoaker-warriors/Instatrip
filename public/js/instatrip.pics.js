@@ -3,7 +3,7 @@ angular.module('instatrip.pics',[])
 
 
 function picsCtrl ($scope, Getdata, $rootScope, $window){
-  
+
   $scope.changeImage = function(){
     $scope.imgs = Getdata.getImages();
     $scope.$emit('content.changed');
