@@ -90,7 +90,6 @@ angular.module('instatrip.services', [])
 
   var markMap = function(num) {
     // collect all of the coords/create require objects and put them into markers array
-
     var curlen = markers.length;
     if (curlen > 0){
       for (var i = 0; i < curlen; i++){
@@ -100,8 +99,18 @@ angular.module('instatrip.services', [])
         markers = [];
     for (var j = 0; j < currentCoords.length; j++){
         var myLatlng = new google.maps.LatLng(currentCoords[j].lat ,currentCoords[j].lng);
+        var curImg = {
+          url: currentImages[j].url,
+          // This marker is 20 pixels wide by 32 pixels tall.
+          scaledSize: new google.maps.Size(50, 50)
+          // The origin for this image is 0,0.
+     //     origin: new google.maps.Point(0,0),
+          // The anchor for this image is the base of the flagpole at 0,32.
+      //    anchor: new google.maps.Point(0, 32)
+        };
         var marker = new google.maps.Marker({
-            position: myLatlng
+            position: myLatlng,
+            icon: curImg
          });
         markers.push(marker);
     }
@@ -142,6 +151,8 @@ angular.module('instatrip.services', [])
       }
       currentImages = imgHolder;
       $state.go('display.pics');
+//REMOVE AFTER DEV
+      console.log(currentImages);
       return currentImages;
     });
   };
