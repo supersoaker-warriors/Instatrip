@@ -86,8 +86,8 @@ body {
   font-size: 22px
 }
 
-.home-button {
-  float: left;
+.home-button .memory-button {
+  float: auto;
   text-align: left;
   margin: 2px 00px;
   display: inline;
