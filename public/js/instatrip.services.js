@@ -266,6 +266,5 @@ angular.module('instatrip.services', [])
             getImages: getImages,
             markMap: markMap,
             zoom: zoom
-
          };
 });
