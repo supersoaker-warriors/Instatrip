@@ -35,13 +35,13 @@ module.exports = {
         //    return photos;
         //   }
         // }
-        if (origin.lat > destination.lat){
+        if (origin.lng > destination.lng){
           photos.sort(function(a, b){
-            return b[0].location.latitude - a[0].location.latitude;
+            return b[0].location.longitude - a[0].location.longitude;
           });
-        } else {  
+        } else {
           photos.sort(function(a, b){
-            return a[0].location.latitude - b[0].location.latitude;
+            return a[0].location.longitude - b[0].location.longitude;
           });
         }
 
