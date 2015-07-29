@@ -8,6 +8,7 @@ module.exports = {
 
   getInstaData : function(latitude, longitude, distance, callback){
     instagram.media.search({lat: latitude, lng: longitude, distance: distance, complete: function(data){
+      console.log(data);
       callback(data);
     }});
   },
