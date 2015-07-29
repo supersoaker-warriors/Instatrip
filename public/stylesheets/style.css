@@ -259,3 +259,29 @@ body {
   overflow:hidden;
   text-align:center;
 }
+
+.markerWrapper {
+  borderWidth: 0px;
+  position: absolute;
+  margin: 0 auto;
+}
+.backgroundStyler {
+  padding: 10px;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 1px rgba(34,35,35,0.97);
+  position: relative;
+}
+.picWrapper {
+
+} 
+.markerPic {
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+}
+
+

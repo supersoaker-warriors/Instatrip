@@ -29,22 +29,33 @@ angular.module('instatrip.services')
   CustomMarker.prototype.onAdd = function() {
 
     var div = document.createElement('div');
-    div.style.borderStyle = 'none';
-    div.style.borderWidth = '0px';
-    div.style.position = 'absolute';
-    div.style.margin = '0 auto';
+    div.className = 'markerWrapper';
+    // div.style.borderStyle = 'none';
+    // div.style.borderWidth = '0px';
+    // div.style.position = 'absolute';
+    // div.style.margin = '0 auto';
+
+    var picWrapper = document.createElement('div');
+    picWrapper.className = 'picWrapper';
+
+    // var backgroundStyler = document.createElement('div');
+    // backgroundStyler.className = 'backgroundStyler';
+
+
+    // var backgroundStyler = document.createElement('div');
+    // backgroundStyler.className = 'backgroundStyler';
 
     // Create the img element and attach it to the div.
     var img = document.createElement('img');
     img.src = this.instaObj.url;
-    img.style.width = '100%';
-    img.style.height = '100%';
-    img.style.position = 'absolute';
-    img.style.left = '0px';
-    div.appendChild(img);
-
+    // img.style.width = '100%';
+    // img.style.height = '100%';
+    // img.style.position = 'absolute';
+    // img.style.left = '0px';
+    img.className = 'markerPic';
+    picWrapper.appendChild(img);
+    div.appendChild(picWrapper);
     this.div = div;
-
     // Add the element to the "overlayLayer" pane.
     var panes = this.getPanes();
     panes.overlayImage.appendChild(div);
