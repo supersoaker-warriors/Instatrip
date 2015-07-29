@@ -1,6 +1,6 @@
 angular.module('instatrip.services', [])
 
-.factory('Getdata', function ($http, $state) {
+.factory('Getdata', function ($http, $state, CustomOverlay) {
   var currentImages = [];
   var currentCoords = [];
   var Map;
@@ -152,21 +152,26 @@ angular.module('instatrip.services', [])
     }
         markers = [];
     for (var j = 0; j < currentCoords.length; j++){
-        var myLatlng = new google.maps.LatLng(currentCoords[j].lat ,currentCoords[j].lng);
+        /*
+        //var myLatlng = new google.maps.LatLng(currentCoords[j].lat ,currentCoords[j].lng);
+        var myLatlng = new google.maps.LatLng(currentImages[j].location.latitude ,currentImages[j].location.longitude);
         var curImg = {
           url: currentImages[j].url,
           // This marker is 20 pixels wide by 32 pixels tall.
           scaledSize: new google.maps.Size(50, 50)
           // The origin for this image is 0,0.
-     //     origin: new google.maps.Point(0,0),
+          //origin: new google.maps.Point(0,0),
           // The anchor for this image is the base of the flagpole at 0,32.
-      //    anchor: new google.maps.Point(0, 32)
+          //anchor: new google.maps.Point(0, 32)
         };
         var marker = new google.maps.Marker({
             position: myLatlng,
             icon: curImg
          });
         markers.push(marker);
+        */
+        var newMarker = CustomOverlay.placeMarker(Map, currentImages[j], j);
+        markers.push(newMarker);
     }
     // remove all of the markers expect the one need to be marked
     // To add or remove the marker to the map, call setMap();
