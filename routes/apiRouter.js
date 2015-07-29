@@ -9,6 +9,7 @@ var passport = require('passport-instagram');
 router.post('/', function(req, res) {
   var coords = req.body.coords;
   var responder = function(data){
+  	console.log(data[0][0].url);
     res.send(JSON.stringify(data));
   };
   instagram.obtainInstaData(coords, responder);
