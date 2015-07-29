@@ -15,6 +15,7 @@ angular.module('instatrip.services', [])
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
     var map;
+    var MY_MAPTYPE_ID = 'custom_style';
     function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer();
       var MakerSquare = new google.maps.LatLng(37.787518, -122.399868);
@@ -25,9 +26,61 @@ angular.module('instatrip.services', [])
         zoomControl: true,
            zoomControlOptions: {
              style: google.maps.ZoomControlStyle.SMALL
-           }
+           },
+        mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+        },
+        mapTypeId: MY_MAPTYPE_ID
       };
+
+      var featureOpts = [
+        {
+          stylers: [
+            { hue: '#f8b5ad' },
+            { visibility: 'simplified' },
+            { gamma: 0.7 },
+            { weight: 0.5 }
+          ]
+        },
+        {
+          featureType: 'landscape',
+          elementType: 'geometry',
+          stylers: [
+            { color: '#f8b5ad' }
+          ],
+        },
+        {
+          elementType: 'labels',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'water',
+          stylers: [
+            { color: '#6d6e72' },
+            { gamma: 0.8 },
+            { weight: 0.8 }
+          ]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels,text.stroke',
+          stylers: [
+            { color: '#6d6e72' },
+            { gamma: 0.4 },
+            { weight: 0.6 }
+          ]
+        }
+      ];
+      var styledMapOptions = {
+        name: 'Custom Style'
+      };
+
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+      map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
       directionsDisplay.setMap(map);
       Map = map;
     }
