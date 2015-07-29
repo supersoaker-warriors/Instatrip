@@ -74,7 +74,7 @@ angular.module('instatrip.services', [])
         }
       ];
       var styledMapOptions = {
-        name: 'Custom Style'
+        name: 'custom style'
       };
 
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);

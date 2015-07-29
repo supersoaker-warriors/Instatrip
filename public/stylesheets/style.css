@@ -32,12 +32,12 @@ html, body, #map-canvas {
   margin: 0;
   padding: 0;
 }
-
+/*
 #map-canvas{
   border-radius: 10px;
   border: 2px solid #FFFFFF;
 }
-
+*/
 .insta-pics{
   border-radius: 10px;
   border: 2px solid #FFFFFF;
@@ -69,12 +69,13 @@ input{
 }
 
 body {
-  background-image: url(../Assets/InstaTrip_v1.jpg);
-  background-position: center center;
+  /*background-image: url(../Assets/InstaTrip_v1.jpg);*/
+/*  background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
-  background-color: #FFFFFF;
+  background-size: cover;*/
+  background-color: #231f20;
+
 }
 
 .insta-feed{
@@ -231,4 +232,30 @@ body {
   text-align: center;
   width: inherit;
   display: inline-block;
+}
+
+.wide {
+  width:100%;
+  height:0px;
+/*  background-image:url('/assets/example/bg_8.jpg');
+  background-size:cover;
+*/}
+
+.wide img {
+  width:100%;
+}
+
+.logo {
+  color:#fff;
+  font-weight:800;
+  font-size:14pt;
+  /*padding:25px;*/
+  text-align:center;
+}
+
+.line {
+  padding-top:8px;
+  white-space:no-wrap;
+  overflow:hidden;
+  text-align:center;
 }
