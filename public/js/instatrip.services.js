@@ -100,11 +100,11 @@ angular.module('instatrip.services', [])
         }
       var nPts = findN(response.routes[0].overview_path, points);
       var coords = [];
-      console.log("Welcome to Team Kraken's InstaTrip!")
+      console.log("Welcome to Team SuperSoaker's InstaTrip!")
       for(var i = 0; i < nPts.length; i++){
         coords.push({
-          lat: nPts[i].A,
-          lng: nPts[i].F
+          lat: nPts[i].G,
+          lng: nPts[i].K
         });
       }
         currentCoords = coords;
