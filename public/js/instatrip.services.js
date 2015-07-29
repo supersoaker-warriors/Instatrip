@@ -1,12 +1,13 @@
 angular.module('instatrip.services', [])
 
-.factory('Getdata', function ($http, $state) {
+.factory('Getdata', function ($http, $state, CustomOverlay) {
   var currentImages = [];
   var currentCoords = [];
   var Map;
   var markers = [];
   var currentMarker;
   var points = 15;
+  var spoints = 90;
   var getmap = function(start,end,travelMethod){
     travelMethod = travelMethod || 'DRIVING';
     start = start || 'San Francisco';
@@ -15,6 +16,7 @@ angular.module('instatrip.services', [])
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
     var map;
+    var MY_MAPTYPE_ID = 'custom_style';
     function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer();
       var MakerSquare = new google.maps.LatLng(37.787518, -122.399868);
@@ -25,14 +27,67 @@ angular.module('instatrip.services', [])
         zoomControl: true,
            zoomControlOptions: {
              style: google.maps.ZoomControlStyle.SMALL
-           }
+           },
+        mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+        },
+        mapTypeId: MY_MAPTYPE_ID
       };
+
+      var featureOpts = [
+        {
+          stylers: [
+            { hue: '#f8b5ad' },
+            { visibility: 'simplified' },
+            { gamma: 0.7 },
+            { weight: 0.5 }
+          ]
+        },
+        {
+          featureType: 'landscape',
+          elementType: 'geometry',
+          stylers: [
+            { color: '#f8b5ad' }
+          ],
+        },
+        {
+          elementType: 'labels',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'water',
+          stylers: [
+            { color: '#6d6e72' },
+            { gamma: 0.8 },
+            { weight: 0.8 }
+          ]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels,text.stroke',
+          stylers: [
+            { color: '#6d6e72' },
+            { gamma: 0.4 },
+            { weight: 0.6 }
+          ]
+        }
+      ];
+      var styledMapOptions = {
+        name: 'custom style'
+      };
+
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+      map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
       directionsDisplay.setMap(map);
       Map = map;
     }
 
     function calcRoute(start, end, travelMethod, callback) {
+      var travelMethod = travelMethod || 'DRIVING';
       var waypoints = []; // these will be waypoints along the way
       var request = {
           origin: start,
@@ -45,12 +100,17 @@ angular.module('instatrip.services', [])
           directionsDisplay.setDirections(response);
         }
       var nPts = findN(response.routes[0].overview_path, points);
+      console.log(response.routes[0].overview_path);
+      var shadowPoints = findN(response.routes[0].overview_path, points);
       var coords = [];
-      console.log("Welcome to Team Kraken's InstaTrip!")
+
+      console.log("Welcome to Team SuperSoaker's InstaTrip!")
+
+
       for(var i = 0; i < nPts.length; i++){
         coords.push({
-          lat: nPts[i].A,
-          lng: nPts[i].F
+          lat: nPts[i].G,
+          lng: nPts[i].K
         });
       }
         currentCoords = coords;
@@ -88,9 +148,41 @@ angular.module('instatrip.services', [])
 
   };
 
+  var zoom = function() {
+    // the zoom function
+
+    var shadowPoints;
+
+    var getBounds = function () {
+    // check bounds of the map
+      google.maps.event.addListener(map, 'bounds_changed', function() {
+          try {
+              if( initialBounds == null ) {
+                  initialBounds = map.getBounds(); 
+              }
+          } catch( err ) {
+              alert( err );
+          }
+      });
+      google.maps.event.addDomListener(controlUI, 'click', function() {
+          // map.setCenter(home)
+          if( initialBounds != null ) {
+              map.fitBounds( initialBounds );
+          }
+      });
+    } // end getBounds
+
+
+    var filterPoints = function () {
+      // filter points whether they are inside bounds
+
+
+    }
+  
+  };// end zoom
+
   var markMap = function(num) {
     // collect all of the coords/create require objects and put them into markers array
-
     var curlen = markers.length;
     if (curlen > 0){
       for (var i = 0; i < curlen; i++){
@@ -99,13 +191,28 @@ angular.module('instatrip.services', [])
     }
         markers = [];
     for (var j = 0; j < currentCoords.length; j++){
-        var myLatlng = new google.maps.LatLng(currentCoords[j].lat ,currentCoords[j].lng);
+        /*
+        //var myLatlng = new google.maps.LatLng(currentCoords[j].lat ,currentCoords[j].lng);
+        var myLatlng = new google.maps.LatLng(currentImages[j].location.latitude ,currentImages[j].location.longitude);
+        var curImg = {
+          url: currentImages[j].url,
+          // This marker is 20 pixels wide by 32 pixels tall.
+          scaledSize: new google.maps.Size(50, 50)
+          // The origin for this image is 0,0.
+          //origin: new google.maps.Point(0,0),
+          // The anchor for this image is the base of the flagpole at 0,32.
+          //anchor: new google.maps.Point(0, 32)
+        };
         var marker = new google.maps.Marker({
-            position: myLatlng
+            position: myLatlng,
+            icon: curImg
          });
         markers.push(marker);
+        */
+        var newMarker = CustomOverlay.placeMarker(Map, currentImages[j], j);
+        markers.push(newMarker);
     }
-    // remove all of the markers expect the one need to be marked
+    // remove all of the markers except the one need to be marked
     // To add or remove the marker to the map, call setMap();
     for (j = 0; j < currentCoords.length; j++){
         if (j === num) {
@@ -142,6 +249,8 @@ angular.module('instatrip.services', [])
       }
       currentImages = imgHolder;
       $state.go('display.pics');
+//REMOVE AFTER DEV
+      console.log(currentImages);
       return currentImages;
     });
   };
@@ -155,7 +264,8 @@ angular.module('instatrip.services', [])
             getmap: getmap,
             getPhoto: getPhoto,
             getImages: getImages,
-            markMap: markMap
+            markMap: markMap,
+            zoom: zoom
 
          };
 });
