@@ -13,10 +13,10 @@ body {
   height: 20px;
   margin: 5px;
 }
-.simple-form {
+/*.simple-form {
   padding: 10px;
   margin: 10px;
-}
+}*/
 #methodtext {
   color: white;
   font-size: 15px;
@@ -47,7 +47,7 @@ html, body, #map-canvas {
 .center{
   position: absolute;
   top: 50%;
-  left: 48%;
+  left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%)
 }
@@ -57,7 +57,7 @@ html, body, #map-canvas {
   margin-left: 7%;
 }
 .form-group{
-  width: 150%;
+  width: 100%;
 }
 
 .methods{
@@ -104,10 +104,12 @@ body {
 .nav-bar{
 /*  overflow: auto;
   width: 100%;*/
-  border-radius: 10px;
-  border: 2px solid #FFFFFF;
+  position: relative;
+  margin: 0 auto;
+  /*border-radius: 10px;
+  border: 2px solid #FFFFFF;*/
   background-color: #676c7f;
-  color: white;
+  /*color: white;*/
 }
 
 .img-responsive {
@@ -115,14 +117,6 @@ body {
   border: 1px solid black;
 }
 
-.team{
-    position:absolute;
-    bottom:0px;
-    right:25%;
-    left:34%;
-    margin-left:-150px;
-    color: black
-}
 
 .ngsb-wrap {
   -ms-touch-action: none;
@@ -209,4 +203,32 @@ body {
 .scrollme {
   max-height: 650px;
 }
-
+.container {
+  width: 100%;
+  float: left;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+.team{
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  margin: 0 auto;
+}
+.team-end .teamstart {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+}
+.btn-group-wrap {
+  text-align: center;
+}
+.btn-group {
+  margin: 0 auto;
+  text-align: center;
+  width: inherit;
+  display: inline-block;
+}
