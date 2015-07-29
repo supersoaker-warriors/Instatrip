@@ -465,8 +465,12 @@ angular.module('instatrip.services', [])
             getmap: getmap,
             getPhoto: getPhoto,
             getImages: getImages,
+<<<<<<< HEAD
             markMap: markMap,
             zoom: zoom,
             currentImages: currentImages
+=======
+            markMap: markMap
+>>>>>>> playing around with files
          };
 });
