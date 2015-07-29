@@ -7,6 +7,7 @@ angular.module('instatrip.services', [])
   var markers = [];
   var currentMarker;
   var points = 15;
+  var spoints = 90;
   var getmap = function(start,end,travelMethod){
     travelMethod = travelMethod || 'DRIVING';
     start = start || 'San Francisco';
@@ -99,8 +100,13 @@ angular.module('instatrip.services', [])
           directionsDisplay.setDirections(response);
         }
       var nPts = findN(response.routes[0].overview_path, points);
+      console.log(response.routes[0].overview_path);
+      var shadowPoints = findN(response.routes[0].overview_path, points);
       var coords = [];
+
       console.log("Welcome to Team SuperSoaker's InstaTrip!")
+
+
       for(var i = 0; i < nPts.length; i++){
         coords.push({
           lat: nPts[i].G,
@@ -142,6 +148,39 @@ angular.module('instatrip.services', [])
 
   };
 
+  var zoom = function() {
+    // the zoom function
+
+    var shadowPoints;
+
+    var getBounds = function () {
+    // check bounds of the map
+      google.maps.event.addListener(map, 'bounds_changed', function() {
+          try {
+              if( initialBounds == null ) {
+                  initialBounds = map.getBounds(); 
+              }
+          } catch( err ) {
+              alert( err );
+          }
+      });
+      google.maps.event.addDomListener(controlUI, 'click', function() {
+          // map.setCenter(home)
+          if( initialBounds != null ) {
+              map.fitBounds( initialBounds );
+          }
+      });
+    } // end getBounds
+
+
+    var filterPoints = function () {
+      // filter points whether they are inside bounds
+
+
+    }
+  
+  };// end zoom
+
   var markMap = function(num) {
     // collect all of the coords/create require objects and put them into markers array
     var curlen = markers.length;
@@ -173,7 +212,7 @@ angular.module('instatrip.services', [])
         var newMarker = CustomOverlay.placeMarker(Map, currentImages[j], j);
         markers.push(newMarker);
     }
-    // remove all of the markers expect the one need to be marked
+    // remove all of the markers except the one need to be marked
     // To add or remove the marker to the map, call setMap();
     for (j = 0; j < currentCoords.length; j++){
         if (j === num) {
@@ -225,7 +264,8 @@ angular.module('instatrip.services', [])
             getmap: getmap,
             getPhoto: getPhoto,
             getImages: getImages,
-            markMap: markMap
+            markMap: markMap,
+            zoom: zoom
 
          };
 });
