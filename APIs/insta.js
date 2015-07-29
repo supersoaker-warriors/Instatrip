@@ -37,11 +37,11 @@ module.exports = {
         // }
         if (origin.lng > destination.lng){
           photos.sort(function(a, b){
-            return b[0].location.longitude - a[0].location.longitude;
+            return b[0].location.latitude - a[0].location.latitude;
           });
-        } else {
+        } else {  
           photos.sort(function(a, b){
-            return a[0].location.longitude - b[0].location.longitude;
+            return a[0].location.latitude - b[0].location.latitude;
           });
         }
 
