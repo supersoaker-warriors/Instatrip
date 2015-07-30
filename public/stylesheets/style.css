@@ -32,12 +32,12 @@ html, body, #map-canvas {
   margin: 0;
   padding: 0;
 }
-/*
+
 #map-canvas{
   border-radius: 10px;
-  border: 2px solid #FFFFFF;
+  border: 1px solid #000000;
 }
-*/
+
 .insta-pics{
 /*  border-radius: 10px;
   border: 2px solid #FFFFFF;
@@ -118,7 +118,7 @@ body {
 .img-responsive {
 /*  margin: 10px 1px 10px 1px;
 */  border: 1px solid black;
-    border-radius: 6px;
+    border-radius: 10px;
 
 }
 
@@ -206,7 +206,8 @@ body {
   /* old ie */
 }
 .scrollme {
-  height: 700px;
+  height: 650px;
+
 }
 .container {
   width: 100%;
@@ -309,6 +310,12 @@ body {
   padding-right: 0px;
   padding-left: 0px;
   height: 100%;
+
+}
+
+.contain {
+  height: 100%;
+
 }
 
 
