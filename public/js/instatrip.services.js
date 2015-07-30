@@ -354,6 +354,7 @@ angular.module('instatrip.services', [])
 
   // Initiate Instagram request and package response into display
   var getPhoto = function(routes){
+    console.log(routes);
     var imgHolder = [];
     var linkHolder = {};
     return $http({
