@@ -3,7 +3,7 @@ angular.module('instatrip.services')
 .factory('CustomOverlay', function() {
   console.log("initialized custom overlay!");
   //if we want to change base icon size, we can do it here
-  var size = 50;
+  var size = 100;
   function CustomMarker(map, instaObj, index) {
     this.index = index;
     //The 'instaObj' argument is like the currentImage
@@ -59,7 +59,7 @@ angular.module('instatrip.services')
     this.div = div;
     // Add the element to the "overlayLayer" pane.
     var panes = this.getPanes();
-    panes.overlayImage.appendChild(div);
+    panes.overlayMouseTarget.appendChild(div);
   };
   CustomMarker.prototype.draw = function() {
 
@@ -74,8 +74,8 @@ angular.module('instatrip.services')
     var point = overlayProjection.fromLatLngToDivPixel(this.latlng);
     // Resize the image's div to fit the indicated dimensions.
     var div = this.div;
-    div.style.left = point.x - 25 +  'px';
-    div.style.top = point.y - 55 + 'px';
+    div.style.left = point.x - (size/2) +  'px';
+    div.style.top = point.y - (size*1.1) + 'px';
     div.style.width =  size + 'px';
     div.style.height = size*1.1 + 'px';
   };

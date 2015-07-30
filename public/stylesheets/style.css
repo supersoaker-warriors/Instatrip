@@ -264,6 +264,7 @@ body {
   borderWidth: 0px;
   position: absolute;
   margin: 0 auto;
+  z-index: 1000000000000000000000000;
 }
 .backgroundStyler {
   height: 91%;
