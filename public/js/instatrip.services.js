@@ -3,6 +3,7 @@ angular.module('instatrip.services', [])
 .factory('Getdata', function ($http, $state, CustomOverlay, $rootScope) {
   var currentImages = [];
   var currentCoords = [];
+  var shadowCoordinates = [];
   var Map;
   var markers = [];
   var currentMarker;
@@ -18,6 +19,7 @@ angular.module('instatrip.services', [])
     var directionsService = new google.maps.DirectionsService();
     var map;
     var MY_MAPTYPE_ID = 'custom_style';
+
     function initialize() {
       var rendererOptions = {
         draggable: true
@@ -213,7 +215,6 @@ angular.module('instatrip.services', [])
     function calcRoute(start, end, travelMethod, callback) {
 
       var travelMethod = travelMethod || 'DRIVING';
-      var waypoints = []; // these will be waypoints along the way
       var request = {
           origin: start,
           destination: end,
@@ -225,10 +226,23 @@ angular.module('instatrip.services', [])
           directionsDisplay.setDirections(response);
         }
       var nPts = findN(response.routes[0].overview_path, points);
-      var shadowPoints = findN(response.routes[0].overview_path, points);
-      var coords = [];
 
-      console.log("Welcome to Team SuperSoaker's InstaTrip!")
+      // console.log(response.routes[0].overview_path);
+
+      var coords = [];
+      //shadow on (i might need to create a separate function)
+      var shadowPoints = findN(response.routes[0].overview_path, points);
+      var shadowCoords = [];
+      console.log("Welcome to Team SuperSoaker's InstaTrip!");
+      for(var i = 0; i < nPts.length; i++){
+        shadowCoords.push({
+          lat: nPts[i].G,
+          lng: nPts[i].K
+        });
+      }
+      console.log(shadowCoords);
+      shadowCoordinates = shadowCoords;
+      //shadow off   
 
 
       for(var i = 0; i < nPts.length; i++){
@@ -238,8 +252,8 @@ angular.module('instatrip.services', [])
         });
       }
 
-        currentCoords = coords;
-        callback(response.routes[0].overview_path, coords);
+      currentCoords = coords;
+      callback(response.routes[0].overview_path, coords);
       });
     }
 
@@ -271,29 +285,34 @@ angular.module('instatrip.services', [])
     };
   };
 
-  var zoom = function() {
+  var zoom = function(bounds) {
     // the zoom function
 
-    var shadowPoints;
+    // todo Thurs:
+        // filter points which are inside bounds
+        // set 15 equidistant ones
+        // call get pictures on them
 
-    var getBounds = function () {
-    // check bounds of the map
-      google.maps.event.addListener(map, 'bounds_changed', function() {
-          try {
-              if( initialBounds == null ) {
-                  initialBounds = map.getBounds();
-              }
-          } catch( err ) {
-              alert( err );
-          }
-      });
-      google.maps.event.addDomListener(controlUI, 'click', function() {
-          // map.setCenter(home)
-          if( initialBounds != null ) {
-              map.fitBounds( initialBounds );
-          }
-      });
-    } // end getBounds
+
+    // var getBounds = function () {
+    // // check bounds of the map
+    //   google.maps.event.addListener(map, 'bounds_changed', function() {
+    //       try {
+    //           if( initialBounds == null ) {
+    //               initialBounds = map.getBounds(); 
+    //           }
+    //       } 
+    //       catch( err ) {
+    //           alert( err );
+    //       }
+    //   });
+    //   google.maps.event.addDomListener(controlUI, 'click', function() {
+    //       // map.setCenter(home)
+    //       if( initialBounds != null ) {
+    //           map.fitBounds( initialBounds );
+    //       }
+    //   });
+    // } // end getBounds
 
 
     var filterPoints = function () {
@@ -302,7 +321,9 @@ angular.module('instatrip.services', [])
 
     }
 
-  };// end zoom
+  
+  }; // end zoom
+
 
   var markMap = function(num) {
     // collect all of the coords/create require objects and put them into markers array
