@@ -6,7 +6,7 @@ function mapCtrl ($scope, Getdata, $rootScope){
 
   $scope.makeMap = function(){
     Getdata.getmap($rootScope.start, $rootScope.end, $rootScope.travelMethod);
-  }
+  };
 
   $scope.makeMap();
 }

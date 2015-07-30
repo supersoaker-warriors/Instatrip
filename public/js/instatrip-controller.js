@@ -1,6 +1,6 @@
 angular
 .module('instatrip')
-.controller('mainCtrl',['$scope', '$rootScope', mainCtrl])
+.controller('mainCtrl',['$scope', '$rootScope', mainCtrl]);
 
 function mainCtrl($scope, $rootScope){
 
@@ -8,6 +8,6 @@ function mainCtrl($scope, $rootScope){
     $rootScope.start = start;
     $rootScope.end = end;
     $rootScope.travelMethod = method || 'DRIVING';
-  }
+  };
 
 }
