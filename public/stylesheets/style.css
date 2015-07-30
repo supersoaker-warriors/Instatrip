@@ -82,7 +82,7 @@ body {
 
 .insta-feed{
   float: left;
-  width: 170px;
+  /*width: 170px;*/
   text-align: left;
   margin: 5px 60px;
   display: inline;
