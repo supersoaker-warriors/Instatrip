@@ -8,9 +8,12 @@ function picsCtrl ($scope, Getdata, $rootScope, $window){
     console.log("changeImage called");
     $scope.imgs = Getdata.getImages();
     $scope.$emit('content.changed');
-    // setTimeout(function(){
-    //   $scope.$emit('content.changed');
-    // },1000);
+    $scope.$emit('content.reload');
+    setTimeout(function(){
+      $scope.$emit('content.reload');
+      $scope.$emit('content.changed');
+
+    },1000);
   };
 
   $scope.changeImage();
