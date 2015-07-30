@@ -406,6 +406,7 @@ angular.module('instatrip.services', [])
             markMap: markMap,
             zoom: zoom,
             currentImages: currentImages,
+            markMap: markMap
             getSongs: getSongs
          };
 });
