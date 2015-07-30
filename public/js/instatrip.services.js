@@ -43,44 +43,141 @@ angular.module('instatrip.services', [])
       };
 
       var featureOpts = [
-        {
-          stylers: [
-            { hue: '#f8b5ad' },
-            { visibility: 'simplified' },
-            { gamma: 0.7 },
-            { weight: 0.5 }
+         {
+          "featureType": "all",
+            "stylers": [
+            {
+              "color": "#1e303d"
+            }
           ]
         },
         {
-          featureType: 'landscape',
-          elementType: 'geometry',
-          stylers: [
-            { color: '#f8b5ad' }
-          ],
-        },
-        {
-          elementType: 'labels',
-          stylers: [
-            { visibility: 'off' }
+          "featureType": "water",
+          "stylers": [
+            {
+              "color": "#0e171d"
+            }
           ]
         },
         {
-          featureType: 'water',
-          stylers: [
-            { color: '#6d6e72' },
-            { gamma: 0.8 },
-            { weight: 0.8 }
+          "featureType": "landscape",
+          "stylers": [
+            {
+              "color": "#1e303d"
+            }
           ]
         },
         {
-          featureType: 'water',
-          elementType: 'labels,text.stroke',
-          stylers: [
-            { color: '#6d6e72' },
-            { gamma: 0.4 },
-            { weight: 0.6 }
+          "featureType": "water",
+          "stylers": [
+            {
+              "color": "#0e171d"
+            }
           ]
-        }
+        },
+        {
+          "featureType": "landscape",
+          "stylers": [
+            {
+              "color": "#1e303d"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "stylers": [
+            {
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "stylers": [
+            {
+              "color": "#1e303d"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "stylers": [
+            {
+              "color": "#182731"
+            },
+            {
+              "visibility": "simplified"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "color": "#f0c514"
+            },
+            {
+              "visibility": "on"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#1e303d"
+            },
+            {
+              "visibility": "on"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#e77e24"
+            },
+              {
+                "visibility": "on"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#94a5a6"
+              }
+              ]
+            },
+            {
+            "featureType": "administrative",
+            "elementType": "labels",
+            "stylers": [
+            {
+              "visibility": "simplified"
+            },
+            {
+              "color": "#e84c3c"
+            }
+            ]
+          },
+        {
+        "featureType": "poi",
+        "stylers": [
+          {
+            "color": "#e84c3c"
+            },
+            {
+              "visibility": "off"
+            }
+        ]
+    },
       ];
       var styledMapOptions = {
         name: 'custom style'
