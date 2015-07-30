@@ -35,6 +35,9 @@ module.exports = {
         //    return photos;
         //   }
         // }
+        for (var i = 0; i <photos.length; i++){
+        console.log(photos[i].location);
+        }
         if (origin.lng > destination.lng){
           photos.sort(function(a, b){
             return b[0].location.longitude - a[0].location.longitude;
