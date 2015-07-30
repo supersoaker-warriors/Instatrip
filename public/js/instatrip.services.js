@@ -1,6 +1,6 @@
 angular.module('instatrip.services', [])
 
-.factory('Getdata', function ($http, $state, CustomOverlay) {
+.factory('Getdata', function ($http, $state, CustomOverlay, $rootScope) {
   var currentImages = [];
   var currentCoords = [];
   var Map;
@@ -8,6 +8,7 @@ angular.module('instatrip.services', [])
   var currentMarker;
   var points = 15;
   var spoints = 90;
+
   var getmap = function(start,end,travelMethod){
     travelMethod = travelMethod || 'DRIVING';
     start = start || 'San Francisco';
@@ -93,22 +94,8 @@ angular.module('instatrip.services', [])
 
       Map = map;
       google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
-        // console.log('location changed', directionsDisplay.directions.routes[0].overview_path[0].G);
-        // var currLat = directionsDisplay.directions.routes[0].overview_path[0].G;
-        // console.log('location changed', directionsDisplay.directions.routes[0].overview_path[0].K);
-        // var currLng = directionsDisplay.directions.routes[0].overview_path[0].K;
-        // console.log('location changed', directionsDisplay.directions.routes[directionsDisplay.directions.routes.length-1].overview_path[0].G);
-        // var nextLat = directionsDisplay.directions.routes[directionsDisplay.directions.routes.length-1].overview_path[0].G;
-        // console.log('location changed', directionsDisplay.directions.routes[directionsDisplay.directions.routes.length-1].overview_path[0].K);
-        // var nextLng = directionsDisplay.directions.routes[directionsDisplay.directions.routes.length-1].overview_path[0].K;
-        // calcRoute({lat: currLat, lng: currLng}, {lat: nextLat, lng: nextLng}, 'DRIVING', ourCallback);
-
-        // calcRoute(origlatt/ destatt/ diriving, ourcallback);
-        // coordinates:
-        // console.log('original lat', this.LatLng);
 
         var tempRoute = directionsDisplay.getDirections().routes[0].overview_path;
-        // console.log(tempRoute);
         var spacedRoute = findN(tempRoute, 15);
         var spaced = [];
         for(var i = 0; i < spacedRoute.length; i++){
@@ -118,17 +105,16 @@ angular.module('instatrip.services', [])
           });
         }
         currentCoords = spaced;
+        ourCallback(tempRoute, spaced).then(function(data, err) {
+          $rootScope.$broadcast('updatedPhotos', data);
+        });
 
-        // console.log('spaced, ', spaced);
-        // getPhotos(spacedRoute);
-        // use ourCallback
-        ourCallback(tempRoute, spaced);
+
       });
     }
 
     function calcRoute(start, end, travelMethod, callback) {
-      // console.log('start ', start);
-      // console.log('end ', end);
+
       var travelMethod = travelMethod || 'DRIVING';
       var waypoints = []; // these will be waypoints along the way
       var request = {
@@ -142,7 +128,6 @@ angular.module('instatrip.services', [])
           directionsDisplay.setDirections(response);
         }
       var nPts = findN(response.routes[0].overview_path, points);
-      console.log(response.routes[0].overview_path);
       var shadowPoints = findN(response.routes[0].overview_path, points);
       var coords = [];
 
@@ -157,7 +142,6 @@ angular.module('instatrip.services', [])
       }
 
         currentCoords = coords;
-        // console.log(currentCoords);
         callback(response.routes[0].overview_path, coords);
       });
     }
@@ -184,8 +168,6 @@ angular.module('instatrip.services', [])
 
 
     function ourCallback(routes, coords){
-      // console.log('coords, ', coords);
-      // console.log('routes, ', routes)
       return getPhoto({
         coords: coords
       });
@@ -294,7 +276,6 @@ angular.module('instatrip.services', [])
       currentImages = imgHolder;
       $state.go('display.pics');
 //REMOVE AFTER DEV
-      console.log(currentImages);
       return currentImages;
     });
   };
@@ -309,6 +290,7 @@ angular.module('instatrip.services', [])
             getPhoto: getPhoto,
             getImages: getImages,
             markMap: markMap,
-            zoom: zoom
+            zoom: zoom,
+            currentImages: currentImages
          };
 });

@@ -12,15 +12,15 @@ router.post('/', function(req, res) {
   instagram.obtainInstaData(coords, responder);
 });
 
-app.get('/auth/instagram',
-  passport.authenticate('instagram'));
+// app.get('/auth/instagram',
+//   passport.authenticate('instagram'));
 
-app.get('/auth/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+// app.get('/auth/instagram/callback',
+//   passport.authenticate('instagram', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 
 // 'https://instagram.com/oauth/authorize/?display=touch&client_id=[ClientID]
 // &redirect_uri=[callbackuri]/&response_type=token'
