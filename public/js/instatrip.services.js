@@ -323,9 +323,7 @@ angular.module('instatrip.services', [])
 
 
     function ourCallback(routes, coords){
-      return getPhoto({
-        coords: coords
-      });
+      return getPhoto({coords: coords}) && getSongs({coords: coords});
     };
   };
 
@@ -431,6 +429,7 @@ angular.module('instatrip.services', [])
 
   // Initiate Instagram request and package response into display
   var getPhoto = function(routes){
+    console.log(routes);
     var imgHolder = [];
     var linkHolder = {};
     return $http({
@@ -457,10 +456,24 @@ angular.module('instatrip.services', [])
   };
 
   var getImages = function(){
+    
     return currentImages;
-
   };
 
+  var getSongs = function(coords){
+    console.log("these are routes", coords);
+    var songs = {}
+    return $http({
+      method: 'POST', 
+      url: '/echo', 
+      data: coords
+    }).then(function(resp){
+      var length = resp.data.length;
+      for (var i = 0; i < length; i++){
+        console.log(resp.data[i].artistName + "-" + resp.data[i].songName); 
+      }
+    });
+  };
   return {
             getmap: getmap,
             getPhoto: getPhoto,
@@ -468,9 +481,14 @@ angular.module('instatrip.services', [])
 <<<<<<< HEAD
             markMap: markMap,
             zoom: zoom,
+<<<<<<< HEAD
             currentImages: currentImages
 =======
             markMap: markMap
 >>>>>>> playing around with files
+=======
+            currentImages: currentImages,
+            getSongs: getSongs
+>>>>>>> Front end logic should be working for echo API call
          };
 });
