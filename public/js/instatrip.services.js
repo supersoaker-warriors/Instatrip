@@ -43,6 +43,14 @@ angular.module('instatrip.services', [])
       };
 
       var featureOpts = [
+         {
+          "featureType": "all",
+            "stylers": [
+            {
+              "color": "#1e303d"
+            }
+          ]
+        },
         {
           "featureType": "water",
           "stylers": [
@@ -147,13 +155,13 @@ angular.module('instatrip.services', [])
         "featureType": "poi",
         "stylers": [
           {
-            "color": "#e84c3c"
+            "color": "#15212a"
             },
             {
-              "visibility": "off"
+              "visibility": "on"
             }
-        ]
-    },
+          ]
+        }
 
       ];
       var styledMapOptions = {
