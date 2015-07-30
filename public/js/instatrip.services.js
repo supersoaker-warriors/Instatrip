@@ -478,17 +478,9 @@ angular.module('instatrip.services', [])
             getmap: getmap,
             getPhoto: getPhoto,
             getImages: getImages,
-<<<<<<< HEAD
             markMap: markMap,
             zoom: zoom,
-<<<<<<< HEAD
-            currentImages: currentImages
-=======
             markMap: markMap
->>>>>>> playing around with files
-=======
-            currentImages: currentImages,
             getSongs: getSongs
->>>>>>> Front end logic should be working for echo API call
          };
 });
