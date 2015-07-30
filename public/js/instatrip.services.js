@@ -68,6 +68,22 @@ angular.module('instatrip.services', [])
           ]
         },
         {
+          "featureType": "water",
+          "stylers": [
+            {
+              "color": "#0e171d"
+            }
+          ]
+        },
+        {
+          "featureType": "landscape",
+          "stylers": [
+            {
+              "color": "#1e303d"
+            }
+          ]
+        },
+        {
           "featureType": "road",
           "stylers": [
             {
@@ -155,14 +171,13 @@ angular.module('instatrip.services', [])
         "featureType": "poi",
         "stylers": [
           {
-            "color": "#15212a"
+            "color": "#e84c3c"
             },
             {
-              "visibility": "on"
+              "visibility": "off"
             }
-          ]
-        }
-
+        ]
+    },
       ];
       var styledMapOptions = {
         name: 'custom style'
