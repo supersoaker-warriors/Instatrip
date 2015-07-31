@@ -8,5 +8,9 @@ function mapCtrl ($scope, Getdata, $rootScope){
     Getdata.getmap($rootScope.start, $rootScope.end, $rootScope.travelMethod);
   };
 
+
   $scope.makeMap();
+  $scope.$on('photo.moved_0', function(){
+ 	console.log("This is in maps controller");
+  });
 }
