@@ -3,5 +3,5 @@ angular.module('instatrip', [
     'instatrip.services',
     'instatrip.pics',
     'instatrip.map',
-    'ngScrollable'
+    'ngScrollable',
     ]);

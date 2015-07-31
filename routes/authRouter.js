@@ -1,32 +1,33 @@
 var express = require('express');
 var instagram = require('../APIs/insta');
-var router = express.Router();
 var passport = require('passport');
-
-
+var router = express.Router();
 
 // GET photo data based on POSTed map coordinates
-router.post('/', function(req, res) {
-  var coords = req.body.coords;
-  var responder = function(data){
-    res.send(JSON.stringify(data));
-  };
-  instagram.obtainInstaData(coords, responder);
-});
-
-router.get('/login', function(req, res) {
-  res.send('login page!');
-});
-
-router.get('/auth/instagram',
+// router.post('/', function(req, res) {
+//   var coords = req.body.coords;
+//   var responder = function(data){
+//     res.send(JSON.stringify(data));
+//   };
+//   instagram.obtainInstaData(coords, responder);
+// });
+// implicit /auth/login because we said use /auth in app
+// router.get('/login', function(req, res) {
+//   res.send('login page from authrouter :) !');
+// });
+// this is what i should get from angular
+router.get('/instagram',
   passport.authenticate('instagram'));
-
-router.get('/auth/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/' }),
+// this is what the callback goes to (change api callback to /auth/instagram/callback)
+router.get('/instagram/callback',
+  passport.authenticate('instagram', { failureRedirect: '/#/display' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    console.log('req, ', req);
+    console.log('res, ', res);
+    res.redirect('/#/display');
   });
+var app = express();
 
 // 'https://instagram.com/oauth/authorize/?display=touch&client_id=[ClientID]
 // &redirect_uri=[callbackuri]/&response_type=token'
