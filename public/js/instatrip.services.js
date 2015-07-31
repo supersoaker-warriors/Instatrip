@@ -410,9 +410,8 @@ angular.module('instatrip.services', [])
             getmap: getmap,
             getPhoto: getPhoto,
             getImages: getImages,
-            zoom: zoom,
             currentImages: currentImages,
-            markMap: markMap
+            markMap: markMap,
             getSongs: getSongs,
             getPlaylist: getPlaylist,
             playList: playList
