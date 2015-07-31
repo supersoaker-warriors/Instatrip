@@ -11,10 +11,10 @@ function mapCtrl ($scope, Getdata, $rootScope){
   $scope.$on('photo.moved_0', function(){
   	 // Getdata.getSongs();
 
-  $scope.playlist = Getdata.getSongs();
+  $scope.playlist = Getdata.getPlaylist();
   $scope.makeMap();
 
   $scope.$on('photo.moved_0', function(){
-  	 // Getdata.getSongs();
+  	 // Getdata.getPlaylist();
   });
 }
