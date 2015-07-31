@@ -17,7 +17,7 @@ function mapCtrl ($scope, Getdata, $rootScope){
   $scope.makeMap();
 
 
-  // $scope.playlist = Getdata.getPlaylist();
+  $scope.playlist = Getdata.getPlaylist();
 
   $scope.$on('photo.moved_0', function(){
     $scope.playlist = Getdata.getPlaylist();

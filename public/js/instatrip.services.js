@@ -206,7 +206,6 @@ angular.module('instatrip.services', [])
           });
         }
         currentCoords = spaced;
-
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
@@ -429,19 +428,21 @@ angular.module('instatrip.services', [])
 
 
   var getSongs = function(coords){
+    console.log(coords, "this is coords");
     var songs = [];
     return $http({
       method: 'POST',
       url: '/echo',
       data: coords
     }).then(function(resp){
-      var length = resp.data.length;
-      for (var i = 0; i < length; i++){
-        songs.push(resp[i]);
-      }
+      console.log("This is the response", resp);
+      // var length = resp.data.length;
+      // for (var i = 0; i < length; i++){
+      //   songs.push(resp[i]);
+      // }
     });
-    var playList = songs;
-    return playList;
+    // var playList = songs;
+    // return playList;
   };
 
   var getPlaylist = function(){
