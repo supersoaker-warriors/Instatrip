@@ -25,7 +25,6 @@ function picsCtrl ($scope, Getdata, $rootScope, $window){
   // listen to the broadcast from ng-scrollable
     $scope.$on('photo.moved_0', function(){
       Getdata.markMap(0);
-      console.log("hello");
     });
     $scope.$on('photo.moved_1', function(){
       Getdata.markMap(1);
@@ -83,7 +82,6 @@ function picsCtrl ($scope, Getdata, $rootScope, $window){
     });
     $scope.$on('photo.moved_19', function(){
       Getdata.markMap(19);
-      console.log(19);
     });
     $scope.$on('photo.moved_20', function(){
       Getdata.markMap(20);
