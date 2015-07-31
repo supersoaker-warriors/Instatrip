@@ -17,14 +17,14 @@ router.post('/', function(req, res) {
 // });
 // this is what i should get from angular
 router.get('/instagram',
-  passport.authenticate('instagram'), function(req, res) {
-    // redirected, this function isn't called
-  });
+  passport.authenticate('instagram'));
 // this is what the callback goes to (change api callback to /auth/instagram/callback)
 router.get('/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/auth/instagram' }),
+  passport.authenticate('instagram', { failureRedirect: '/#/display' }),
   function(req, res) {
     // Successful authentication, redirect home.
+    // console.log('req, ', req);
+    // console.log('res, ', res);
     res.redirect('/#/display');
   });
 var app = express();
