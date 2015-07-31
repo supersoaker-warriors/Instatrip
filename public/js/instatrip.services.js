@@ -429,7 +429,6 @@ angular.module('instatrip.services', [])
 
   // Initiate Instagram request and package response into display
   var getPhoto = function(routes){
-    console.log(routes);
     var imgHolder = [];
     var linkHolder = {};
     return $http({
@@ -461,8 +460,7 @@ angular.module('instatrip.services', [])
   };
 
   var getSongs = function(coords){
-    console.log("these are routes", coords);
-    var songs = {}
+    var playlist = [];
     return $http({
       method: 'POST', 
       url: '/echo', 
@@ -470,9 +468,10 @@ angular.module('instatrip.services', [])
     }).then(function(resp){
       var length = resp.data.length;
       for (var i = 0; i < length; i++){
-        console.log(resp.data[i].artistName + "-" + resp.data[i].songName); 
+        playlist.push(resp[i]);
       }
     });
+    return playlist;
   };
   return {
             getmap: getmap,
