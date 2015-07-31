@@ -205,6 +205,9 @@ angular.module('instatrip.services', [])
           });
         }
         currentCoords = spaced;
+        // console.log('tempRoute, ', tempRoute);
+        // console.log('spaced, ', spaced);
+
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
@@ -215,12 +218,12 @@ angular.module('instatrip.services', [])
       // code below listens for changes in map boundaries,
       // calculates new points depending on position and zoom
       // and pulls new pictures
-      
+
       google.maps.event.addListener(Map, 'idle', function() {
         var bounds = map.getBounds();
 
         var containsArray = [];
-        if (fullRoute) {     
+        if (fullRoute) {
 
           for (var i = 0; i < fullRoute.length; i++ ) {
 
@@ -232,10 +235,10 @@ angular.module('instatrip.services', [])
           }
           var newPoints = findN(containsArray, 15);
           var spaced = [];
-          for(var i = 0; i < newPoints.length; i++){
+          for(var j = 0; i < newPoints.length; j++){
             spaced.push({
-              lat: newPoints[i].G,
-              lng: newPoints[i].K
+              lat: newPoints[j].G,
+              lng: newPoints[j].K
             });
           }
           ourCallback([], spaced).then(function (data, err) {
@@ -243,9 +246,10 @@ angular.module('instatrip.services', [])
               console.log(err);
             }
             $rootScope.$broadcast('updatedPhotos', data);
-            
-          })
+
+          });
         }
+
       });
     }
 
@@ -307,6 +311,42 @@ angular.module('instatrip.services', [])
       });
     };
   };
+
+  // sends a request to apiServer for a redirect link
+  var getLogin = function(){
+    console.log("getlogin");
+  //     var imgHolder = [];
+  //     var linkHolder = {};
+    return $http({
+      method: 'GET',
+      url: '/self/feed'
+    }).success(function(data) {
+      console.log('in services');
+    }).error(function(data) {
+      console.log('error');
+    });
+
+  //       method: 'POST',
+  //       url: "/search",
+  //       data: routes
+  //     }).then(function(resp){
+  //       var respLength = resp.data.length;
+  //       for(var i = 0; i < respLength; i++){
+  //         for (var j = 0; j < resp.data[i].length; j++){
+  //           if (!(resp.data[i][j].link in linkHolder)){
+  //             linkHolder[resp.data[i][j].link] = resp.data[i][j];
+  //             imgHolder.push(resp.data[i][j]);
+  //             break;
+  //           }
+  //         }
+  //       }
+  //       currentImages = imgHolder;
+  //       $state.go('display.pics');
+  // //REMOVE AFTER DEV
+  //       return currentImages;
+  //     });
+    };
+
 
   var markMap = function(num) {
     // collect all of the coords/create require objects and put them into markers array
@@ -391,6 +431,7 @@ angular.module('instatrip.services', [])
             getPhoto: getPhoto,
             getImages: getImages,
             markMap: markMap,
-            currentImages: currentImages
+            currentImages: currentImages,
+            getLogin: getLogin
          };
 });
