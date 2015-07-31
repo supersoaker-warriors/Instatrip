@@ -210,7 +210,7 @@ angular.module('instatrip.services', [])
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
-        getSongs(spaced);
+        // getSongs(spaced);
       });
 
       // code below listens for changes in map boundaries,
@@ -222,7 +222,6 @@ angular.module('instatrip.services', [])
 
         var containsArray = [];
         if (fullRoute) {
-
           for (var i = 0; i < fullRoute.length; i++ ) {
 
             if (bounds.contains(fullRoute[i])) {

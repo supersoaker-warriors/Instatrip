@@ -21,7 +21,7 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 app.use(bodyParser.json());
 app.use(session({secret: 'spaghetti',
                 key: 'whatisauth',
@@ -45,7 +45,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/search', apiRouter);
 app.use('/auth', authRouter);
-
+//app.use('/echo', echoRouter);
 
 // if you want to use a database, create one
 if (keys.use_database === 'true') {
@@ -70,10 +70,6 @@ passport.use(new InstagramStrategy({
 
 // Route for form POST from landing page containing GPS coordinates
 
-app.use('/search', apiRouter);
-app.use('/echo', echoRouter);
-//Route to search for songs
-//app.use('/echo', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
