@@ -7,6 +7,7 @@ function picsCtrl ($scope, Getdata, $rootScope, $window){
   $scope.changeImage = function(){
     console.log("changeImage called");
     $scope.imgs = Getdata.getImages();
+    //research emit
     $scope.$emit('content.changed');
     $scope.$emit('content.reload');
     setTimeout(function(){
@@ -15,7 +16,6 @@ function picsCtrl ($scope, Getdata, $rootScope, $window){
 
     },1000);
   };
-
   $scope.changeImage();
 
   $scope.openLink = function(location){

@@ -7,16 +7,34 @@ instagram.set('client_secret', keys.InstaClientSecret);
 module.exports = {
 
   getInstaData : function(latitude, longitude, distance, callback){
-    instagram.media.search({lat: latitude, lng: longitude, distance: distance, complete: function(data){
+      instagram.media.search({lat: latitude, lng: longitude, distance: distance, complete: function(data){
       callback(data);
     }});
+    // instagram.tags.search({q: "hello", complete:function(data){
+    //   console.log(data);
+    //   callback(data);
+    //   }});
+    // instagram.media.popular({complete: function(data){
+    //   console.log(data.length);
+    //   // callback(data);
+    // }});
   },
 
   sortInstaData: function(photos, coords){
         var origin = coords[0];
         var destination = coords[coords.length -1];
-
+        // for (var i = 0; i < coords.length; i++){
+        //   console.log(i + "long - " + coords[i].lng + " lat -" + coords[i].lat);
+        // }
+        // console.log ("origin longitude: ", origin.lng);
+        // console.log("destination longitude: ", destination.lng);
         // Sort photos based on longitude and direction of travel
+        // if(origin.lat < destination.lat){
+        //   if(origin.lng > destination.lng){
+        //     console.log("A is southwest of B");
+        //    return photos;
+        //   }
+        // }
         if (origin.lng > destination.lng){
           photos.sort(function(a, b){
             return b[0].location.longitude - a[0].location.longitude;

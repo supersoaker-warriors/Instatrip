@@ -10,6 +10,7 @@ angular.module('instatrip.services', [])
   var currentMarker;
   var points = 15;
   var spoints = 90;
+  var playList = [];
 
   var getmap = function(start,end,travelMethod){
     travelMethod = travelMethod || 'DRIVING';
@@ -209,8 +210,7 @@ angular.module('instatrip.services', [])
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
-
-
+        getSongs(spaced);
       });
 
       google.maps.event.addListener(Map, 'idle', function() {
@@ -323,9 +323,7 @@ angular.module('instatrip.services', [])
 
 
     function ourCallback(routes, coords){
-      return getPhoto({
-        coords: coords
-      });
+      return getPhoto({coords: coords});
     };
   };
 
@@ -457,16 +455,41 @@ angular.module('instatrip.services', [])
   };
 
   var getImages = function(){
+    
     return currentImages;
+  };
 
+
+  var getSongs = function(coords){
+    console.log("blah", coords);
+    var songs = [];
+    return $http({
+      method: 'POST', 
+      url: '/echo', 
+      data: coords
+    }).then(function(resp){
+      var length = resp.data.length;
+      for (var i = 0; i < length; i++){
+        songs.push(resp[i]);
+      }
+    });
+    var playList = songs;
+    return playList;
+  };
+
+  var getPlaylist = function(){
+    return playList;
   };
 
   return {
             getmap: getmap,
             getPhoto: getPhoto,
             getImages: getImages,
-            markMap: markMap,
             zoom: zoom,
-            currentImages: currentImages
+            markMap: markMap,
+            currentImages: currentImages,
+            getSongs: getSongs,
+            getPlaylist: getPlaylist,
+            playList: playList
          };
 });

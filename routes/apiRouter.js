@@ -3,6 +3,8 @@ var instagram = require('../APIs/insta');
 var router = express.Router();
 var passport = require('passport-instagram');
 
+
+
 // GET photo data based on POSTed map coordinates
 router.post('/', function(req, res) {
   var coords = req.body.coords;
