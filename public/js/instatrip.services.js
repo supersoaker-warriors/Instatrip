@@ -318,7 +318,7 @@ angular.module('instatrip.services', [])
   //     var linkHolder = {};
     return $http({
       method: 'GET',
-      url: '/users/self/feed'
+      url: '/auth/instagram'
     }).success(function(data) {
       console.log(data);
     }).error(function(data) {
@@ -326,7 +326,7 @@ angular.module('instatrip.services', [])
     });
 
   //       method: 'POST',
-  //       url: "/searcheverything",
+  //       url: "/search",
   //       data: routes
   //     }).then(function(resp){
   //       var respLength = resp.data.length;
