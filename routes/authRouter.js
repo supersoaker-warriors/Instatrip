@@ -27,6 +27,7 @@ router.get('/instagram/callback',
     console.log('req, ', req);
     console.log('res, ', res);
 
+
     res.redirect('/#/display');
   });
 var app = express();
