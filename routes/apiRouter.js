@@ -19,7 +19,9 @@ router.get('/login', function(req, res) {
 });
 
 router.get('/auth/instagram',
-  passport.authenticate('instagram'));
+  passport.authenticate('instagram'), function(req, res) {
+    console.log('authorized');
+  });
 
 router.get('/auth/instagram/callback',
   passport.authenticate('instagram', { failureRedirect: '/' }),
