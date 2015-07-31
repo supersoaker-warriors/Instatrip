@@ -60,6 +60,9 @@ passport.use(new InstagramStrategy({
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
       keys.access_token = accessToken;
+      console.log('accessToken?, ', accessToken);
+      console.log('profile, ', profile);
+      return done();
     });
   }
 ));

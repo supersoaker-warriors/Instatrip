@@ -12,6 +12,7 @@ var router = express.Router();
 //   instagram.obtainInstaData(coords, responder);
 // });
 
+
 // implicit /auth/login because we said use /auth in app
 // router.get('/login', function(req, res) {
 //   res.send('login page from authrouter :) !');
@@ -26,6 +27,7 @@ router.get('/instagram/callback',
     // Successful authentication, redirect home.
     console.log('req, ', req);
     console.log('res, ', res);
+
 
 
     res.redirect('/#/display');
