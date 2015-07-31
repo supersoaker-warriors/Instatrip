@@ -310,14 +310,22 @@ angular.module('instatrip.services', [])
     console.log("getlogin");
   //     var imgHolder = [];
   //     var linkHolder = {};
-    return $http({
-      method: 'GET',
-      url: '/self/feed'
-    }).success(function(data) {
-      console.log('in services');
-    }).error(function(data) {
-      console.log('error');
-    });
+  return $http({
+    method: 'GET',
+    url: '/auth/instagram',
+  }).success(function() {
+    console.log('about to auth');
+  }).error(function() {
+    console.log('no auth');
+  });
+    // return $http({
+    //   method: 'GET',
+    //   url: '/users/????/media/recent'
+    // }).success(function(data) {
+    //   console.log('in services');
+    // }).error(function(data) {
+    //   console.log('error');
+    // });
 
   //       method: 'POST',
   //       url: "/search",
