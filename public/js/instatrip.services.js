@@ -485,5 +485,8 @@ angular.module('instatrip.services', [])
             zoom: zoom,
             markMap: markMap
             getSongs: getSongs
+            currentImages: currentImages,
+            getSongs: getSongs,
+            getPlaylist: getPlaylist
          };
 });
