@@ -14,6 +14,14 @@ router.post('/', function(req, res) {
   instagram.obtainInstaData(coords, responder);
 });
 
+// echoRouter.post('/echo', function(req, res) {
+//   console.log("echo router called!")
+//   var coords = req.body.coords;
+//   var echoResponder = function(data){
+//     res.send(JSON.stringify(data));
+//   };
+//   echo.songsIterator(coords, echoResponder);
+// });
 router.get('/login', function(req, res) {
   res.send('login page!');
 });

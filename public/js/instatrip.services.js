@@ -210,7 +210,7 @@ angular.module('instatrip.services', [])
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
-        // getSongs(spaced);
+         getSongs(spaced);
       });
 
       // code below listens for changes in map boundaries,
