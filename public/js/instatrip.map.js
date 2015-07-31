@@ -23,7 +23,6 @@ function mapCtrl ($scope, Getdata, $rootScope){
     $scope.playlist = Getdata.getPlaylist();
   });
   $scope.$on('photo.moved_1', function(){
-    console.log("number1")
     $scope.playlist = Getdata.getPlaylist();
   });
   $scope.$on('photo.moved_2', function(){

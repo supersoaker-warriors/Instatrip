@@ -8,6 +8,7 @@ var prettyJson = require('prettyjson');
 //-122.41929
 //
 var obtainEchoData = function(latLng, index, pusher){
+  console.log(latLng);
   var lat = latLng.lat;
   var lng = latLng.lng;
   request({
