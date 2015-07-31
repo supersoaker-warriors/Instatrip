@@ -209,8 +209,7 @@ angular.module('instatrip.services', [])
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
-
-
+        getSongs(spaced);
       });
 
       // code below listens for changes in map boundaries,
@@ -303,7 +302,7 @@ angular.module('instatrip.services', [])
 
 
     function ourCallback(routes, coords){
-      return getPhoto({coords: coords}) && getSongs({coords: coords});
+      return getPhoto({coords: coords});
     };
   };
 
@@ -387,6 +386,7 @@ angular.module('instatrip.services', [])
 
 
   var getSongs = function(coords){
+    console.log("blah", coords);
     var songs = [];
     return $http({
       method: 'POST', 
