@@ -317,4 +317,11 @@ body {
 
 }
 
+.playlist {
+  background-color: #CCCCCC;
+  color: #8B4513;
+  height: 100%;
+  width: 25%;
+  float: right;
+}
 

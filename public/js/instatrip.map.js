@@ -3,10 +3,61 @@ angular.module('instatrip.map',[])
 
 function mapCtrl ($scope, Getdata, $rootScope){
   $scope.getmap = Getdata.getmap;
-
   $scope.makeMap = function(){
     Getdata.getmap($rootScope.start, $rootScope.end, $rootScope.travelMethod);
   };
-
   $scope.makeMap();
+
+
+  // $scope.playlist = Getdata.getPlaylist();
+
+  $scope.$on('photo.moved_0', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_1', function(){
+    console.log("number1")
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_2', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_3', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_4', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_5', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_6', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_7', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_8', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_9', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_10', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_11', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_12', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_13', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_14', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
+  $scope.$on('photo.moved_15', function(){
+    $scope.playlist = Getdata.getPlaylist();
+  });
 }
