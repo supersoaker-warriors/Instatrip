@@ -205,6 +205,7 @@ angular.module('instatrip.services', [])
           });
         }
         currentCoords = spaced;
+        console.log(spaced);
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
