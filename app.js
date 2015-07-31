@@ -30,6 +30,18 @@ app.use(session({secret: 'spaghetti',
                 resave: true
                 }));
 
+// fix cors
+app.use(function(req, res, next) {
+res.header('Access-Control-Allow-Credentials', true);
+res.header('Access-Control-Allow-Origin', req.headers.origin);
+res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+if ('OPTIONS' == req.method) {
+     res.send(200);
+ } else {
+     next();
+ }
+});
 
 // set up passport session
 passport.serializeUser(function(user, done) {
@@ -60,10 +72,13 @@ passport.use(new InstagramStrategy({
 },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
-      keys.access_token = accessToken;
+      // keys.access_token = accessToken;
       console.log('accessToken?, ', accessToken);
       console.log('profile, ', profile);
+      console.log('profile.id, ', profile.id);
+
       return done();
+
     });
   }
 ));
