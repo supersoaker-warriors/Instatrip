@@ -434,18 +434,15 @@ angular.module('instatrip.services', [])
       url: '/echo',
       data: coords
     }).then(function(resp){
-      console.log("This is the response", resp);
-      var length = resp.data.length;
-      for (var i = 0; i < length; i++){
-        songs.push(resp[i]);
-      }
-    });
-    var playList = songs;
+      songs = resp.data;
+      console.log(songs);
+     playList = songs;
     return playList;
+    });
   };
 
-  var getPlaylist = function(){
-    return playList;
+  var getPlaylist = function(index){
+    return playList[index];
   };
 
   return {

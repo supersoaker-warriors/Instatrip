@@ -4,10 +4,10 @@ var echo = require('../APIs/echo');
 var echoRouter = express.Router();
 
 echoRouter.post('/', function(req, res) {
-  console.log("echo router called!")
-  console.log(req.body);
+  // console.log("echo router called!")
+  // console.log(req.body);
   var coords = req.body;
-	console.log("this is the echo!!!",req);
+	// console.log("this is the echo!!!",req);
   var coords = req.body;
   var echoResponder = function(data){
     res.send(JSON.stringify(data));
