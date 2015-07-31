@@ -386,7 +386,6 @@ angular.module('instatrip.services', [])
 
 
   var getSongs = function(coords){
-    console.log("blah", coords);
     var songs = [];
     return $http({
       method: 'POST', 
