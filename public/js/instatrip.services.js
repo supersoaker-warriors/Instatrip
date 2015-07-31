@@ -10,6 +10,7 @@ angular.module('instatrip.services', [])
   var currentMarker;
   var points = 15;
   var spoints = 90;
+  var playList = [];
 
   var getmap = function(start,end,travelMethod){
     travelMethod = travelMethod || 'DRIVING';
@@ -459,8 +460,9 @@ angular.module('instatrip.services', [])
     return currentImages;
   };
 
+
   var getSongs = function(coords){
-    var playlist = [];
+    var songs = [];
     return $http({
       method: 'POST', 
       url: '/echo', 
@@ -468,15 +470,20 @@ angular.module('instatrip.services', [])
     }).then(function(resp){
       var length = resp.data.length;
       for (var i = 0; i < length; i++){
-        playlist.push(resp[i]);
+        songs.push(resp[i]);
       }
     });
-    return playlist;
+    var playList = songs;
+    return playList;
   };
 
   var getPlaylist = function){
     return playlist;
   };
+  var getPlaylist = function(){
+    return playList;
+  };
+
   return {
             getmap: getmap,
             getPhoto: getPhoto,
@@ -488,5 +495,7 @@ angular.module('instatrip.services', [])
             currentImages: currentImages,
             getSongs: getSongs,
             getPlaylist: getPlaylist
+            getPlaylist: getPlaylist,
+            playList: playList
          };
 });
