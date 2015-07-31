@@ -35,10 +35,16 @@ var obtainEchoData = function(latLng, index, pusher){
           console.log(error);
       } else {
           var objBody = JSON.parse(body);
+          console.log(objBody.response);
+          if(objBody.response.songs){
           
-          var song = objBody.response.songs[0];
-          
-          pusher(index, song);
+            var song = objBody.response.songs[0];
+            console.log("song!: ", song);
+            pusher(index, song);
+          } else {
+            console.log("no songs!");
+            pusher(index, {song: "blank"});
+          }
       }
   });
 };

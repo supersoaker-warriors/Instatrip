@@ -10,6 +10,7 @@ var session = require('express-session');
 var apiRouter = require('./routes/apiRouter');
 
 var echoRouter = require('./routes/echoRouter');
+var echo = require('./APIs/echo');
 
 var authRouter = require('./routes/authRouter');
 var passport = require('passport');
@@ -45,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/search', apiRouter);
 app.use('/auth', authRouter);
-//app.use('/echo', echoRouter);
+app.use('/echo', echoRouter);
 
 // if you want to use a database, create one
 if (keys.use_database === 'true') {
@@ -101,6 +102,17 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+// app.post("/", function(req, res) {
+//   console.log("post called!");
+
+//   var coords = req.body.coords;
+//   res.send(JSON.stringify(coords));
+//   var echoResponder = function(data){
+//     res.send(JSON.stringify(data));
+//   };
+//   echo.songsIterator(coords, echoResponder);
+// })
 
 
 
