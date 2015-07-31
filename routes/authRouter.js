@@ -1,7 +1,7 @@
 var express = require('express');
 var instagram = require('../APIs/insta');
 var passport = require('passport');
-var router = express.Router();
+var authRouter = express.Router();
 
 // GET photo data based on POSTed map coordinates
 // router.post('/', function(req, res) {
@@ -18,10 +18,10 @@ var router = express.Router();
 //   res.send('login page from authrouter :) !');
 // });
 // this is what i should get from angular
-router.get('/instagram',
+authRouter.get('/instagram',
   passport.authenticate('instagram'));
 // this is what the callback goes to (change api callback to /auth/instagram/callback)
-router.get('/instagram/callback',
+authRouter.get('/instagram/callback',
   passport.authenticate('instagram', { failureRedirect: '/#/display' }),
   function(req, res) {
     // Successful authentication, redirect home.
@@ -56,7 +56,7 @@ var app = express();
 // }
 
 
-module.exports = router;
+module.exports = authRouter;
 
 
 

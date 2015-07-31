@@ -221,7 +221,7 @@ angular.module('instatrip.services', [])
         var bounds = map.getBounds();
 
         var containsArray = [];
-        if (fullRoute) {
+        if (fullRoute)
           for (var i = 0; i < fullRoute.length; i++ ) {
 
             if (bounds.contains(fullRoute[i])) {
@@ -232,7 +232,7 @@ angular.module('instatrip.services', [])
           }
           var newPoints = findN(containsArray, 15);
           var spaced = [];
-          for(var j = 0; i < newPoints.length; j++){
+          for(var j = 0; j < newPoints.length; j++){
             spaced.push({
               lat: newPoints[j].G,
               lng: newPoints[j].K
@@ -245,8 +245,6 @@ angular.module('instatrip.services', [])
             $rootScope.$broadcast('updatedPhotos', data);
 
           });
-        }
-
       });
     }
 
