@@ -4,12 +4,7 @@ var router = express.Router();
 var passport = require('passport-instagram');
 
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> [FIX] Got playlist to work
 // GET photo data based on POSTed map coordinates
 router.post('/', function(req, res) {
   var coords = req.body.coords;
