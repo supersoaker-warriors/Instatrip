@@ -402,9 +402,6 @@ angular.module('instatrip.services', [])
     return playList;
   };
 
-  var getPlaylist = function){
-    return playlist;
-  };
   var getPlaylist = function(){
     return playList;
   };
@@ -413,14 +410,10 @@ angular.module('instatrip.services', [])
             getmap: getmap,
             getPhoto: getPhoto,
             getImages: getImages,
-            markMap: markMap,
             zoom: zoom,
             currentImages: currentImages,
             markMap: markMap
-            getSongs: getSongs
-            currentImages: currentImages,
             getSongs: getSongs,
-            getPlaylist: getPlaylist
             getPlaylist: getPlaylist,
             playList: playList
          };
