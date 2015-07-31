@@ -249,6 +249,7 @@ angular.module('instatrip.services', [])
 
           });
         }
+
       });
     }
 
@@ -318,9 +319,9 @@ angular.module('instatrip.services', [])
   //     var linkHolder = {};
     return $http({
       method: 'GET',
-      url: '/auth/instagram'
+      url: '/self/feed'
     }).success(function(data) {
-      console.log(data);
+      console.log('in services');
     }).error(function(data) {
       console.log('error');
     });
