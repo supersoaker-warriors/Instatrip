@@ -11,10 +11,24 @@ var apiRouter = require('./routes/apiRouter');
 
 var echoRouter = require('./routes/echoRouter');
 
+var authRouter = require('./routes/authRouter');
 var passport = require('passport');
 var InstagramStrategy = require('passport-instagram').Strategy;
 var keys = require('./config.js');
 var app = express();
+
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+app.use(passport.initialize());
+// app.use(passport.session());
+app.use(bodyParser.json());
+app.use(session({secret: 'spaghetti',
+                key: 'whatisauth',
+                saveUninitialized: true,
+                resave: true
+                }));
+
 
 // set up passport session
 passport.serializeUser(function(user, done) {
@@ -27,12 +41,10 @@ passport.deserializeUser(function(obj, done) {
 
 app.use(favicon(path.join(__dirname, 'public/Assets', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 app.use('/search', apiRouter);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/auth', authRouter);
 
 
 // if you want to use a database, create one
@@ -47,7 +59,7 @@ passport.use(new InstagramStrategy({
 },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
-      return done(null, profile);
+      keys.access_token = accessToken;
     });
   }
 ));
@@ -90,14 +102,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-app.use(passport.session());
-app.use(passport.initialize());
-app.use(session({secret: 'spaghetti',
-                key: 'whatisauth',
-                saveUninitialized: true,
-                resave: true
-                }));
 
 
 

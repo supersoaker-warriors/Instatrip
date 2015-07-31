@@ -18,17 +18,6 @@ router.get('/login', function(req, res) {
   res.send('login page!');
 });
 
-router.get('/auth/instagram',
-  passport.authenticate('instagram'), function(req, res) {
-    console.log('authorized');
-  });
-
-router.get('/auth/instagram/callback',
-  passport.authenticate('instagram', { failureRedirect: '/' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
 
 // 'https://instagram.com/oauth/authorize/?display=touch&client_id=[ClientID]
 // &redirect_uri=[callbackuri]/&response_type=token'
