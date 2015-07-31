@@ -1,7 +1,7 @@
 var express = require('express');
 var instagram = require('../APIs/insta');
 var router = express.Router();
-var passport = require('passport-instagram');
+var passport = require('passport');
 
 // GET photo data based on POSTed map coordinates
 router.post('/', function(req, res) {
@@ -12,15 +12,19 @@ router.post('/', function(req, res) {
   instagram.obtainInstaData(coords, responder);
 });
 
-// app.get('/auth/instagram',
-//   passport.authenticate('instagram'));
+router.get('/login', function(req, res) {
+  res.send('login page!');
+});
 
-// app.get('/auth/instagram/callback',
-//   passport.authenticate('instagram', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
+router.get('/auth/instagram',
+  passport.authenticate('instagram'));
+
+router.get('/auth/instagram/callback',
+  passport.authenticate('instagram', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // 'https://instagram.com/oauth/authorize/?display=touch&client_id=[ClientID]
 // &redirect_uri=[callbackuri]/&response_type=token'
