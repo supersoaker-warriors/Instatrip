@@ -398,6 +398,10 @@ angular.module('instatrip.services', [])
     });
     return playlist;
   };
+
+  var getPlaylist = function){
+    return playlist;
+  };
   return {
             getmap: getmap,
             getPhoto: getPhoto,
