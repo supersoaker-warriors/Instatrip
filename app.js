@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var instagram = require('./APIs/insta.js');
 
 var apiRouter = require('./routes/apiRouter');
+var echoRouter = require('./routes/echoRouter');
 
 var app = express();
 
@@ -20,6 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Route for form POST from landing page containing GPS coordinates
 app.use('/search', apiRouter);
+app.use('/echo', echoRouter);
+//Route to search for songs
+//app.use('/echo', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
