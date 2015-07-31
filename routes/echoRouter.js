@@ -8,7 +8,7 @@ echoRouter.post('/', function(req, res) {
   console.log(req.body);
   var coords = req.body;
 	console.log("this is the echo!!!",req);
-  var coords = req.body.coords;
+  var coords = req.body;
   var echoResponder = function(data){
     res.send(JSON.stringify(data));
   };
