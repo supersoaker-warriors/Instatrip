@@ -4,7 +4,6 @@ angular.module('instatrip.services', [])
   var currentImages = [];
   var currentCoords = [];
   var fullRoute;
-  // var shadowCoordinates = [];
   var Map;
   var markers = [];
   var currentMarker;
@@ -213,46 +212,41 @@ angular.module('instatrip.services', [])
 
       });
 
+      // code below listens for changes in map boundaries,
+      // calculates new points depending on position and zoom
+      // and pulls new pictures
+      
       google.maps.event.addListener(Map, 'idle', function() {
         var bounds = map.getBounds();
 
-
-        //console.log(fullRoute);
-        //var tempCoord;
         var containsArray = [];
+        if (fullRoute) {     
 
-        for (var i = 0; i < fullRoute.length; i++ ) {
+          for (var i = 0; i < fullRoute.length; i++ ) {
 
-          if (bounds.contains(fullRoute[i])) {
-            containsArray.push(fullRoute[i]);
+            if (bounds.contains(fullRoute[i])) {
+              containsArray.push(fullRoute[i]);
+            }
+            else {
+            }
           }
-          else {
+          var newPoints = findN(containsArray, 15);
+          var spaced = [];
+          for(var i = 0; i < newPoints.length; i++){
+            spaced.push({
+              lat: newPoints[i].G,
+              lng: newPoints[i].K
+            });
           }
+          ourCallback([], spaced).then(function (data, err) {
+            if (err) {
+              console.log(err);
+            }
+            $rootScope.$broadcast('updatedPhotos', data);
+            
+          })
         }
-        var newPoints = findN(containsArray, 15);
-        var spaced = [];
-        for(var i = 0; i < newPoints.length; i++){
-          spaced.push({
-            lat: newPoints[i].G,
-            lng: newPoints[i].K
-          });
-        }
-        ourCallback([], spaced).then(function (data, err) {
-          if (err) {
-            console.log(err);
-          }
-          $rootScope.$broadcast('updatedPhotos', data);
-          
-        })
-
-
-
       });
-
-
-
-
-
     }
 
     function calcRoute(start, end, travelMethod, callback) {
@@ -270,23 +264,8 @@ angular.module('instatrip.services', [])
         }
       var nPts = findN(response.routes[0].overview_path, points);
 
-      // console.log(response.routes[0].overview_path);
 
       var coords = [];
-      //shadow on (i might need to create a separate function)
-      // var shadowPoints = findN(response.routes[0].overview_path, points);
-      // var shadowCoords = [];
-      // console.log("Welcome to Team SuperSoaker's InstaTrip!");
-      // for(var i = 0; i < nPts.length; i++){
-      //   shadowCoords.push({
-      //     lat: nPts[i].G,
-      //     lng: nPts[i].K
-      //   });
-      // }
-      // console.log(shadowCoords);
-      // shadowCoordinates = shadowCoords;
-      //shadow off   
-
 
       for(var i = 0; i < nPts.length; i++){
         coords.push({
@@ -328,60 +307,6 @@ angular.module('instatrip.services', [])
       });
     };
   };
-
-  var zoom = function(bounds) {
-
-    
-
-
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-      
-
-
-
-    });
-
-   //map.getBouds();
-
-
-    // the zoom function
-
-    // todo Thurs:
-        // filter points which are inside bounds
-        // set 15 equidistant ones
-        // call get pictures on them
-
-
-    // var getBounds = function () {
-    // // check bounds of the map
-    //   google.maps.event.addListener(map, 'bounds_changed', function() {
-    //       try {
-    //           if( initialBounds == null ) {
-    //               initialBounds = map.getBounds(); 
-    //           }
-    //       } 
-    //       catch( err ) {
-    //           alert( err );
-    //       }
-    //   });
-    //   google.maps.event.addDomListener(controlUI, 'click', function() {
-    //       // map.setCenter(home)
-    //       if( initialBounds != null ) {
-    //           map.fitBounds( initialBounds );
-    //       }
-    //   });
-    // } // end getBounds
-
-
-    var filterPoints = function () {
-      // filter points whether they are inside bounds
-
-
-    }
-
-  
-  }; // end zoom
-
 
   var markMap = function(num) {
     // collect all of the coords/create require objects and put them into markers array
@@ -466,7 +391,6 @@ angular.module('instatrip.services', [])
             getPhoto: getPhoto,
             getImages: getImages,
             markMap: markMap,
-            zoom: zoom,
             currentImages: currentImages
          };
 });
