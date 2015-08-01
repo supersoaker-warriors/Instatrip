@@ -314,9 +314,9 @@ angular.module('instatrip.services', [])
   //     var linkHolder = {};
   return $http({
     method: 'GET',
-    url: '/auth/instagram',
-  }).success(function() {
-    console.log('about to auth');
+    url: 'users/48523579/media/recent'
+  }).success(function(data) {
+    console.log('about to auth ', data);
   }).error(function() {
     console.log('no auth');
   });

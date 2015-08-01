@@ -19,8 +19,8 @@ var keys = require('./config.js');
 var app = express();
 
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
@@ -76,7 +76,7 @@ passport.use(new InstagramStrategy({
       console.log('accessToken?, ', accessToken);
       console.log('profile, ', profile);
       console.log('profile.id, ', profile.id);
-
+      // res.cookie('accessToken', accessToken);
       return done();
 
     });
@@ -112,7 +112,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.send('error', {
     message: err.message,
     error: {}
   });
