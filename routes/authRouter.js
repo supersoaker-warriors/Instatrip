@@ -32,10 +32,9 @@ authRouter.get('/instagram/callback', function(req, res) {
   .send('redirect_uri=' + config.callback_url)
   .send('code=' + code)
   .end(function(err, instaRes) {
-    console.log(instaRes.body);
-    console.log('req ', req);
-    console.log('res ', res);
+    req.session.access_token = instaRes.body.access_token;
     res.send(instaRes.body);
+
   });
 
 });
