@@ -209,7 +209,10 @@ angular.module('instatrip.services', [])
         ourCallback(tempRoute, spaced).then(function(data, err) {
           $rootScope.$broadcast('updatedPhotos', data);
         });
-         getSongs(spaced);
+         getSongs(spaced).then(function(data, err) {
+          $rootScope.$broadcast('updatedSongs', data);
+
+         })
       });
 
       // code below listens for changes in map boundaries,
@@ -443,6 +446,14 @@ angular.module('instatrip.services', [])
   var getPlaylist = function(index){
     return playList[index];
   };
+
+  // var spotifyPreview = function(){
+  //   var previews = {};
+  //   return $http({
+  //     method: 'GET',
+  //     url: ''
+  //   })
+  // };
 
   return {
             getmap: getmap,
