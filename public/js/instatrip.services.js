@@ -435,7 +435,6 @@ angular.module('instatrip.services', [])
       data: coords
     }).then(function(resp){
       songs = resp.data;
-      console.log(songs);
      playList = songs;
     return playList;
     });
