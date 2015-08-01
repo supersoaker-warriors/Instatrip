@@ -18,9 +18,9 @@
         <li><a ui-sref="landing">Reload Images</a></li>
       </ul>
       <div class = "playlist">
-        <p>How about some Tunes!</p>
-        {{playlist.artist}} {{playlist.songName}}
-      </p>Enjoy</p>
+        <h5>What's a roadtrip without music! May we reccommend:</h5>
+        <p> <strong>{{playlist.title}} </strong> <span>by</span> {{playlist.artist_name}} </p>
+        <p>{{playlist.artist_location.location}}</p>
       </div>
     </div>
   </div>
