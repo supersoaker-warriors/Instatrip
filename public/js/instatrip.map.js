@@ -70,4 +70,9 @@ function mapCtrl ($scope, Getdata, $rootScope){
   $scope.$on('photo.moved_15', function(){
     $scope.playlist = Getdata.getPlaylist(15);
   });
+
+
+  $scope.$on('updatedSongs', function(event, data) {
+    $scope.playlist = data;
+  });
 }
