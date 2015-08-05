@@ -1,17 +1,15 @@
 # TeamKraken
-TeamKraken's Project Repo
+Supersoaker Warriors' Project Repo
 
 ## Overview ##
 
-InstaView enables users to input a starting and end point then receive the fastest route based on their method and all instagram posts made within the last hour along that route. 
+InstaView enables users to input a starting and end point then receive the fastest route based on their method and all instagram posts made within the last hour along that route.
 
 It is a great way to provide users with a visualization of their route and interesting things happening on that route just before they head out.
 
-Simply visit https://teamkraken.herokuapp.com to use the application.
-
 ## Installation ##
 
-To work on the source code, after cloning the repo you must npm & bower install. 
+To work on the source code, after cloning the repo you must npm & bower install.
 To start your local server enter into the bin folder and enter DEBUG=server npm start
 
 ## API Reference ##
@@ -23,6 +21,12 @@ For Instagram you will need a client ID and client secret.
 You must create a config.js file within the instatrip folder and insert the below into it + your keys:
 module.exports = {
   InstaClientID: 'INSERT HERE',
-  InstaClientSecret: 'INSERT HERE'
-}
+  InstaClientSecret: 'INSERT HERE',
+  use_database: 'false',
+  callback_url: 'INSERT HERE',
+  access_token: null,
+  EchoApiKey: 'INSERT HERE',
+  EchoSecret: 'INSERT HERE'
+};
+
 
