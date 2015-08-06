@@ -8,7 +8,6 @@ angular.module('instatrip.services', [])
   var markers = [];
   var currentMarker;
   var points = 15;
-  var spoints = 90;
   var playList = [];
 
   var getmap = function(start,end,travelMethod){
@@ -220,32 +219,27 @@ angular.module('instatrip.services', [])
       // and pulls new pictures
 
       google.maps.event.addListener(Map, 'idle', function() {
-        console.log('step 1 in event listener');
         var bounds = map.getBounds();
 
         var containsArray = [];
         if (fullRoute)
           for (var i = 0; i < fullRoute.length; i++ ) {
-            console.log('step 2 in loop');
 
             if (bounds.contains(fullRoute[i])) {
               containsArray.push(fullRoute[i]);
             }
             else {
-              console.log('should not get here');
             }
           }
           var newPoints = findN(containsArray, 15);
           var spaced = [];
           for(var j = 0; j < newPoints.length; j++){
-            console.log('pushing in new coords');
             spaced.push({
               lat: newPoints[j].G,
               lng: newPoints[j].K
             });
           }
           ourCallback([], spaced).then(function (data, err) {
-            console.log('about to update photos');
             if (err) {
               console.log(err);
             }
@@ -300,7 +294,7 @@ angular.module('instatrip.services', [])
             divis = n;
         }
 
-        for(var i = 0; i < len; i+=divis){
+        for(var i = 0; i < divis*n; i+=divis){
             output.push(input[i]);
         }
         return output;

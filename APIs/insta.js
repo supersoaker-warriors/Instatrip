@@ -61,7 +61,7 @@ module.exports = {
         photoArray.push({
           link: data[i].link,
           url: data[i].images.low_resolution.url,
-          location: data[i].location
+          location: data[i].location || null
         });
       }
       results.push(photoArray);
