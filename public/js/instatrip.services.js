@@ -30,7 +30,6 @@ angular.module('instatrip.services', [])
       var mapOptions = {
         zoom:7,
         center: MakerSquare,
-        // disableDefaultUI: true,
         draggable: true,
         zoomControl: true,
            zoomControlOptions: {
@@ -210,9 +209,10 @@ angular.module('instatrip.services', [])
           $rootScope.$broadcast('updatedPhotos', data);
         });
          getSongs(spaced).then(function(data, err) {
+          // console.log(data);
           $rootScope.$broadcast('updatedSongs', data);
 
-         })
+         });
       });
 
       // code below listens for changes in map boundaries,
@@ -220,27 +220,32 @@ angular.module('instatrip.services', [])
       // and pulls new pictures
 
       google.maps.event.addListener(Map, 'idle', function() {
+        console.log('step 1 in event listener');
         var bounds = map.getBounds();
 
         var containsArray = [];
         if (fullRoute)
           for (var i = 0; i < fullRoute.length; i++ ) {
+            console.log('step 2 in loop');
 
             if (bounds.contains(fullRoute[i])) {
               containsArray.push(fullRoute[i]);
             }
             else {
+              console.log('should not get here');
             }
           }
           var newPoints = findN(containsArray, 15);
           var spaced = [];
           for(var j = 0; j < newPoints.length; j++){
+            console.log('pushing in new coords');
             spaced.push({
               lat: newPoints[j].G,
               lng: newPoints[j].K
             });
           }
           ourCallback([], spaced).then(function (data, err) {
+            console.log('about to update photos');
             if (err) {
               console.log(err);
             }
@@ -252,7 +257,7 @@ angular.module('instatrip.services', [])
 
     function calcRoute(start, end, travelMethod, callback) {
 
-      var travelMethod = travelMethod || 'DRIVING';
+      travelMethod = travelMethod || 'DRIVING';
       var request = {
           origin: start,
           destination: end,
@@ -314,9 +319,12 @@ angular.module('instatrip.services', [])
   //     var linkHolder = {};
   return $http({
     method: 'GET',
-    url: 'users/48523579/media/recent'
+    url: '/auth/instagram',
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }).success(function(data) {
-    console.log('about to auth ', data);
+    // console.log('about to auth ', data);
   }).error(function() {
     console.log('no auth');
   });
@@ -328,27 +336,7 @@ angular.module('instatrip.services', [])
     // }).error(function(data) {
     //   console.log('error');
     // });
-
-  //       method: 'POST',
-  //       url: "/search",
-  //       data: routes
-  //     }).then(function(resp){
-  //       var respLength = resp.data.length;
-  //       for(var i = 0; i < respLength; i++){
-  //         for (var j = 0; j < resp.data[i].length; j++){
-  //           if (!(resp.data[i][j].link in linkHolder)){
-  //             linkHolder[resp.data[i][j].link] = resp.data[i][j];
-  //             imgHolder.push(resp.data[i][j]);
-  //             break;
-  //           }
-  //         }
-  //       }
-  //       currentImages = imgHolder;
-  //       $state.go('display.pics');
-  // //REMOVE AFTER DEV
-  //       return currentImages;
-  //     });
-    };
+  };
 
 
   var markMap = function(num) {
@@ -361,24 +349,7 @@ angular.module('instatrip.services', [])
     }
         markers = [];
     for (var j = 0; j < currentImages.length; j++){
-        /*
-        //var myLatlng = new google.maps.LatLng(currentCoords[j].lat ,currentCoords[j].lng);
-        var myLatlng = new google.maps.LatLng(currentImages[j].location.latitude ,currentImages[j].location.longitude);
-        var curImg = {
-          url: currentImages[j].url,
-          // This marker is 20 pixels wide by 32 pixels tall.
-          scaledSize: new google.maps.Size(50, 50)
-          // The origin for this image is 0,0.
-          //origin: new google.maps.Point(0,0),
-          // The anchor for this image is the base of the flagpole at 0,32.
-          //anchor: new google.maps.Point(0, 32)
-        };
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            icon: curImg
-         });
-        markers.push(marker);
-        */
+
         var newMarker = CustomOverlay.placeMarker(Map, currentImages[j], j);
         markers.push(newMarker);
     }
@@ -419,7 +390,6 @@ angular.module('instatrip.services', [])
       }
       currentImages = imgHolder;
       $state.go('display.pics');
-//REMOVE AFTER DEV
       return currentImages;
     });
   };
@@ -438,22 +408,14 @@ angular.module('instatrip.services', [])
       data: coords
     }).then(function(resp){
       songs = resp.data;
-     playList = songs;
-    return playList;
+      playList = songs;
+      return playList;
     });
   };
 
   var getPlaylist = function(index){
     return playList[index];
   };
-
-  // var spotifyPreview = function(){
-  //   var previews = {};
-  //   return $http({
-  //     method: 'GET',
-  //     url: ''
-  //   })
-  // };
 
   return {
             getmap: getmap,

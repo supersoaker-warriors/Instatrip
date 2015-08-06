@@ -1,3 +1,4 @@
+var request = require('superagent');
 var instagram = require('instagram-node-lib');
 var keys = require('../config.js');
 var debug = require('debug')('server');
@@ -78,11 +79,30 @@ module.exports = {
       this.getInstaData(lat, lng, dist, photoParser.bind(this));
     }
 
-  }
+  },
 
-  // get your photos
-  // getMyData: function(){
-  //   instagram.user.self.media()
-  // };
+  getMyInstaData: function(token, callback) {
+    request.get('https://api.instagram.com/v1/users/self/media/recent/?access_token='+token)
+    .set('access_token', token)
+    .end(function(err, response) {
+      if (err) {
+        console.log('err');
+      } else {
+        // console.log('insta.js, ', response.body.data);
+        callback(response.body);
+      }
+    });
+  },
+
+//   getInstaSelf: function() {
+//     instagram.set
+//     instagram.users.self();
+//   }
+
+//   // get your photos
+//   // getMyData: function(access_token){
+//   //   instagram.set('access_token', access_token);
+//   //   console.log(instagram.users.self());
+//   // }
 
 };

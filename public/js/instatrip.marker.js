@@ -6,34 +6,20 @@ angular.module('instatrip.services')
   var size = 100;
   function CustomMarker(map, instaObj, index) {
     this.index = index;
-    //The 'instaObj' argument is like the currentImage
-    //{
-    //   $$hashkey: "string",
-    //   link: "instapageurl",
-    //   location: {id: int,
-    //              latitude: int,
-    //              longitude: int,
-    //              name: "CityString"},
-    //   url: "sourceurl"
-    //}
-    //
+
     this.instaObj = instaObj;
     //TODO: latlng
     this.latlng = new google.maps.LatLng(this.instaObj.location.latitude ,this.instaObj.location.longitude);
-    this.map = map; 
+    this.map = map;
     this.setMap(map);
-    this.div = null; 
+    this.div = null;
   }
   CustomMarker.prototype = new google.maps.OverlayView();
-  
+
   CustomMarker.prototype.onAdd = function() {
 
     var div = document.createElement('div');
     div.className = 'markerWrapper';
-    // div.style.borderStyle = 'none';
-    // div.style.borderWidth = '0px';
-    // div.style.position = 'absolute';
-    // div.style.margin = '0 auto';
 
     var picWrapper = document.createElement('div');
     picWrapper.className = 'picWrapper';
@@ -41,17 +27,10 @@ angular.module('instatrip.services')
     var backgroundStyler = document.createElement('div');
     backgroundStyler.className = 'backgroundStyler';
 
-
-    // var backgroundStyler = document.createElement('div');
-    // backgroundStyler.className = 'backgroundStyler';
-
     // Create the img element and attach it to the div.
     var img = document.createElement('img');
     img.src = this.instaObj.url;
-    // img.style.width = '100%';
-    // img.style.height = '100%';
-    // img.style.position = 'absolute';
-    // img.style.left = '0px';
+
     img.className = 'markerPic';
     picWrapper.appendChild(img);
     backgroundStyler.appendChild(picWrapper);
