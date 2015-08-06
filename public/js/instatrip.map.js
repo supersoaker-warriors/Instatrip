@@ -9,7 +9,7 @@ function mapCtrl ($scope, Getdata, $rootScope){
 
   // this will call the Getdata factory method to login
   $scope.logIn = function() {
-    console.log("logging in redirect");
+    console.log("in mapcontroler");
     Getdata.getLogin();
   };
 
@@ -18,12 +18,8 @@ function mapCtrl ($scope, Getdata, $rootScope){
 
   $scope.makeMap();
 
-
-  //$scope.playlist = Getdata.getPlaylist();
-
   $scope.$on('photo.moved_0', function(){
     $scope.playlist = Getdata.getPlaylist(0);
-    //scope artist 
   });
   $scope.$on('photo.moved_1', function(){
     $scope.playlist = Getdata.getPlaylist(1);
